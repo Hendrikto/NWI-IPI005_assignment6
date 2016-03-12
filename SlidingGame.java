@@ -19,6 +19,7 @@ public class SlidingGame implements Configuration {
      */
     private final int[][] board;
     private int holeX, holeY;
+    private int heuristic;
 
     /**
      * A constructor that initializes the board with the specified array
@@ -38,6 +39,7 @@ public class SlidingGame implements Configuration {
                 this.holeY = p / N;
             }
         }
+        this.heuristic = this.calculateHeuristic();
     }
 
     public SlidingGame(SlidingGame s) {
@@ -49,6 +51,7 @@ public class SlidingGame implements Configuration {
         }
         this.holeX = s.holeX;
         this.holeY = s.holeY;
+        this.heuristic = s.heuristic;
     }
 
     /**
@@ -144,7 +147,12 @@ public class SlidingGame implements Configuration {
 
     @Override
     public int compareTo(Configuration g) {
-        throw new UnsupportedOperationException("compareTo : not supported yet.");
+        return this.heuristic - g.getHeuristic();
+    }
+
+    @Override
+    public int getHeuristic() {
+        return this.heuristic;
     }
 
     private static boolean withinBounds(int x, int y) {
@@ -165,11 +173,23 @@ public class SlidingGame implements Configuration {
         );
         this.holeX += d.GetDX();
         this.holeY += d.GetDY();
+        this.heuristic = this.calculateHeuristic();
     }
 
     private void swap(int x1, int y1, int x2, int y2) {
         int temp = this.board[x1][y1];
         this.board[x1][y1] = this.board[x2][y2];
         this.board[x2][y2] = temp;
+    }
+
+    private int calculateHeuristic() {
+        int heuristic = 0;
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < N; x++) {
+                heuristic += Math.abs(x - (this.board[x][y] - 1) % N);
+                heuristic += Math.abs(y - (this.board[x][y] - 1) / N);
+            }
+        }
+        return heuristic;
     }
 }
