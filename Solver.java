@@ -1,5 +1,7 @@
 package assignment6;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,10 +18,13 @@ import java.util.Queue;
 public class Solver {
     // A queue for maintaining graphs that are not visited yet.
     private final Queue<Node<Configuration>> toExamine;
+    private final Collection<Configuration> cache;
 
     public Solver(Configuration g) {
         this.toExamine = new LinkedList<>();
         this.toExamine.add(new Node<>(null, g));
+        this.cache = new HashSet<>();
+        this.cache.add(g);
     }
 
     /**
@@ -35,7 +40,10 @@ public class Solver {
                 return "Success!";
             } else {
                 for (Configuration succ : next.getItem().successors()) {
-                    toExamine.add(new Node<>(next, succ));
+                    if (!this.cache.contains(succ)) {
+                        this.toExamine.add(new Node<>(next, succ));
+                        this.cache.add(succ);
+                    }
                 }
             }
         }

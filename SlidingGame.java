@@ -95,6 +95,22 @@ public class SlidingGame implements Configuration {
     }
 
     /**
+     * Generate a hash for this configuration.
+     *
+     * @return a hash for this configuration
+     */
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        for (int x = 0; x < N; x++) {
+            for (int y = 0; y < N; y++) {
+                hash += this.board[x][y] * Math.pow(31, x + y * N);
+            }
+        }
+        return hash;
+    }
+
+    /**
      * Check whether the current configuration is a solution.
      *
      * @return whether the current configuration is a solution
