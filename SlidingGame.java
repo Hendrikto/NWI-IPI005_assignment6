@@ -42,6 +42,11 @@ public class SlidingGame implements Configuration {
         this.heuristic = this.calculateHeuristic();
     }
 
+    /**
+     * Copy constructor.
+     *
+     * @param s the SlidingGame to copy
+     */
     public SlidingGame(SlidingGame s) {
         this.board = new int[N][N];
         for (int y = 0; y < N; y++) {
@@ -131,6 +136,11 @@ public class SlidingGame implements Configuration {
         return true;
     }
 
+    /**
+     * Get a collection of successors for this configuration.
+     *
+     * @return a collection of successors for this configuration
+     */
     @Override
     public Collection<Configuration> successors() {
         Collection<Configuration> successors = new LinkedList<>();
@@ -145,16 +155,35 @@ public class SlidingGame implements Configuration {
         return successors;
     }
 
+    /**
+     * Compare this configuration to another.
+     *
+     * @param g the configuration to compare to
+     * @return [heuristic of this] - [heuristic of g]
+     */
     @Override
     public int compareTo(Configuration g) {
         return this.heuristic - g.getHeuristic();
     }
 
+    /**
+     * Accessor for the heuristic of this configuration.
+     *
+     * @return the heuristic of this configuration
+     */
     @Override
     public int getHeuristic() {
         return this.heuristic;
     }
 
+    /**
+     * Check whether given x and y-coordinates are within the boundaries of the
+     * board.
+     *
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return whether the coordinates fall within the boundaries of the board
+     */
     private static boolean withinBounds(int x, int y) {
         return (
             x >= 0 &&
@@ -164,6 +193,11 @@ public class SlidingGame implements Configuration {
         );
     }
 
+    /**
+     * Move the empty tile in the given direction.
+     *
+     * @param d the direction to move
+     */
     private void move(Direction d) {
         swap(
             this.holeX,
@@ -176,12 +210,24 @@ public class SlidingGame implements Configuration {
         this.heuristic = this.calculateHeuristic();
     }
 
+    /**
+     * Swap two tiles.
+     *
+     * @param x1 x-coordinate of the first tile
+     * @param y1 y-coordinate of the first tile
+     * @param x2 x-coordinate of the second tile
+     * @param y2 y-coordinate of the second tile
+     */
     private void swap(int x1, int y1, int x2, int y2) {
         int temp = this.board[x1][y1];
         this.board[x1][y1] = this.board[x2][y2];
         this.board[x2][y2] = temp;
     }
-
+    /**
+     * Calculate a heuristic for this configuration.
+     *
+     * @return a heuristic for this configuration
+     */
     private int calculateHeuristic() {
         int heuristic = 0;
         for (int y = 0; y < N; y++) {
