@@ -33,8 +33,8 @@ public class Solver {
      * @return a string representation of the solution
      */
     public String solve() {
-        while (!toExamine.isEmpty()) {
-            Node<Configuration> next = toExamine.remove();
+        while (!this.toExamine.isEmpty()) {
+            Node<Configuration> next = this.toExamine.remove();
             if (next.getItem().isSolution()) {
                 System.out.println(next);
                 return "Success!";

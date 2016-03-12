@@ -27,21 +27,21 @@ public class SlidingGame implements Configuration {
      * elements of start are stored row-wise.
      */
     public SlidingGame(int[] start) {
-        board = new int[N][N];
+        this.board = new int[N][N];
 
         assert start.length == N * N : "Length of specified board incorrect";
 
         for (int p = 0; p < start.length; p++) {
-            board[p % N][p / N] = start[p];
+            this.board[p % N][p / N] = start[p];
             if (start[p] == HOLE) {
-                holeX = p % N;
-                holeY = p / N;
+                this.holeX = p % N;
+                this.holeY = p / N;
             }
         }
     }
 
     public SlidingGame(SlidingGame s) {
-        board = new int[N][N];
+        this.board = new int[N][N];
         for (int y = 0; y < N; y++) {
             for (int x = 0; x < N; x++) {
                 this.board[x][y] = s.board[x][y];
@@ -62,7 +62,7 @@ public class SlidingGame implements Configuration {
         StringBuilder buf = new StringBuilder();
         for (int row = 0; row < N; row++) {
             for (int col = 0; col < N; col++) {
-                int puzzel = board[col][row];
+                int puzzel = this.board[col][row];
                 buf.append(puzzel == HOLE ? "  " : puzzel + " ");
             }
             buf.append("\n");
@@ -85,7 +85,7 @@ public class SlidingGame implements Configuration {
             SlidingGame other_puzzle = (SlidingGame) o;
             for (int row = 0; row < N; row++) {
                 for (int col = 0; col < N; col++) {
-                    if (board[col][row] != other_puzzle.board[col][row]) {
+                    if (this.board[col][row] != other_puzzle.board[col][row]) {
                         return false;
                     }
                 }
