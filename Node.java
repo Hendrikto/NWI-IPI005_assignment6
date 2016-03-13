@@ -60,11 +60,24 @@ public class Node<T extends Configuration> implements Comparable<Node<T>> {
         return length;
     }
 
+    /**
+     * Compare this node to another.
+     *
+     * @param n the Node to compare to
+     * @return the result of comparing the item of this node with the other's
+     */
     @Override
     public int compareTo(Node<T> n) {
         return this.item.compareTo(n.item);
     }
 
+    /**
+     * Get a String containing a step number plus the respective configuration
+     * from the begin node up to this Node.
+     *
+     * @return a String containing a step number plus the respective
+     * configuration from the begin node up to this Node
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
