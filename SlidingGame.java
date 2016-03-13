@@ -71,7 +71,7 @@ public class SlidingGame implements Configuration {
         for (int row = 0; row < N; row++) {
             for (int col = 0; col < N; col++) {
                 int puzzel = this.board[col][row];
-                buf.append(puzzel == HOLE ? "  " : puzzel + " ");
+                buf.append(String.format("%3s", puzzel == HOLE ? "" : puzzel));
             }
             buf.append("\n");
         }
