@@ -20,6 +20,11 @@ public class Solver {
     private final Queue<Node<Configuration>> toExamine;
     private final Collection<Configuration> cache;
 
+    /**
+     * Constructor method.
+     *
+     * @param g a starting configuration
+     */
     public Solver(Configuration g) {
         this.toExamine = new PriorityQueue<>();
         this.toExamine.add(new Node<>(null, g));
