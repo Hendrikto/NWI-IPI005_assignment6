@@ -12,7 +12,7 @@ import java.util.LinkedList;
  * implementing the Graph interface
  */
 public class SlidingGame implements Configuration {
-    public static final int N = 3, SIZE = N * N, HOLE = SIZE;
+    public static final int N = 4, SIZE = N * N, HOLE = SIZE;
     /**
      * The board is represented by a 2-dimensional array; the position of the
      * hole is kept in 2 variables holeX and holeY
@@ -223,6 +223,7 @@ public class SlidingGame implements Configuration {
         this.board[x1][y1] = this.board[x2][y2];
         this.board[x2][y2] = temp;
     }
+
     /**
      * Calculate a heuristic for this configuration.
      *
