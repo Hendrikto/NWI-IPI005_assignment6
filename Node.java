@@ -10,7 +10,7 @@ package assignment6;
  * @version 1.3
  * @date 07-03-2016
  */
-public class Node<T> {
+public class Node<T extends Configuration> implements Comparable<Node<T>> {
     // the data field
     private final T item;
     // a reference to the predecessor
@@ -58,6 +58,11 @@ public class Node<T> {
             length++;
         }
         return length;
+    }
+
+    @Override
+    public int compareTo(Node<T> n) {
+        return this.item.compareTo(n.item);
     }
 
     @Override

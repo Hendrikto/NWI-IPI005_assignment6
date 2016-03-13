@@ -2,7 +2,7 @@ package assignment6;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
@@ -21,7 +21,7 @@ public class Solver {
     private final Collection<Configuration> cache;
 
     public Solver(Configuration g) {
-        this.toExamine = new LinkedList<>();
+        this.toExamine = new PriorityQueue<>();
         this.toExamine.add(new Node<>(null, g));
         this.cache = new HashSet<>();
         this.cache.add(g);
