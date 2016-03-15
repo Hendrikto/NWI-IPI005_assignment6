@@ -33,6 +33,9 @@ public class SlidingGame implements Configuration {
         assert start.length == N * N : "Length of specified board incorrect";
 
         for (int p = 0; p < start.length; p++) {
+            if (start[p] < 1 || start[p] > SIZE) {
+                throw new Error(String.format("Invalid number %d at position %d.", start[p], p));
+            }
             this.board[p % N][p / N] = start[p];
             if (start[p] == HOLE) {
                 this.holeX = p % N;
